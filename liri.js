@@ -13,13 +13,6 @@ var value = process.argv[3];
 var client = new Twitter(keys.twitter);
 var spotify = new Spotify(keys.spotify);
 
-var params = {screen_name: 'Bwash105'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets[0].text);
-  }
-});
-
 // Switch Actions to target the Action
 switch (action) {
     case "my-tweets":
@@ -41,7 +34,25 @@ switch (action) {
 // my-tweets
 // node liri.js my-tweets
 // -----------------------------
+function myTweets() {
+var params = {screen_name: 'Bwash105'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets[0].text);
+  }
+  for (var k = 0; k < 5; k++) {
+    var tweetArr = [];
+    for(var i = 0; i < tweets[i].length; i++) {
+      tweet = tweets[i].text
+      tweetArr.push(tweet);
+    }
+    console.log("-------------------------------");
+      console.log("Tweets: " + tweetArr.join(", "));
+      console.log("-------------------------------");
+  }
 
+});
+}
 
 // spotify-this-song
 // node liri.js spotify-this-song '<song name here>'
